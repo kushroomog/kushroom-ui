@@ -163,7 +163,7 @@ const about = {
           <>2020: participou do Beco do Magrão em Poá/SP.</>,
           <>Influências: MPB, Jazz, música latina.</>,
         ],
-        instagram: "frdmiranda",
+        instagram: "chicodisk",
         image: "/images/kush/chico.jpg",
       },
       {
