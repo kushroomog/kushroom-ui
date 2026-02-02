@@ -163,8 +163,49 @@ const about = {
           <>2020: participou do Beco do Magrão em Poá/SP.</>,
           <>Influências: MPB, Jazz, música latina.</>,
         ],
-        instagram: "frdmiranda",
+        instagram: "chicodisk",
         image: "/images/kush/chico.jpg",
+      },
+      {
+        company: "Mossato",
+        timeframe: "2024 – Presente",
+        role: "Produtor • 3D • Audiovisual • Fotografia • Videomaker",
+        achievements: [
+          <>
+            Engenheiro de mix e master na Kushroom, moldando identidade e punch.
+          </>,
+          <>
+            Atua em audiovisual: direção, captação e edição de clipes e
+            sessions.
+          </>,
+          <>
+            Cria conteúdos em 3D e fotografia, integrando imagem e som na
+            estética da label.
+          </>,
+        ],
+        instagram: "mossato1400",
+        image: "/images/kush/mossato.jpg",
+      },
+      {
+        company: "Lucas Carvalho",
+        timeframe: "2024 – Presente",
+        role: "Tatuador • Artista Visual • Co-criador da Kushroom Clothing",
+        achievements: [
+          <>
+            Artista visual responsável por transportar o universo da Kushroom
+            para murais, capas e coleções.
+          </>,
+          <>
+            Fundou o Tattoo Carva em 2021, criando um estúdio criativo para
+            conectar pessoas às artes que sonham.
+          </>,
+          <>
+            Um dos criadores da Kushroom Clothing, conectando tatuagem, moda e
+            lifestyle independente.
+          </>,
+        ],
+        instagram: "lu_carva",
+        image: "/images/kush/luqueta.jpg",
       },
     ],
   },
