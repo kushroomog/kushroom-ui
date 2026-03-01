@@ -1,8 +1,6 @@
 import React from "react";
-
 import {
   Heading,
-  Flex,
   Text,
   Button,
   Avatar,
@@ -10,16 +8,16 @@ import {
   Column,
   Badge,
   Row,
-} from "@/once-ui/components";
-import { TeamSection } from "@/components/TeamSection";
-import { gallery } from "@/app/resources/content";
+  Schema,
+  Meta,
+  Line,
+  Flex,
+} from "@once-ui-system/core";
+import { home, about, person, baseURL, routes } from "@/resources";
 import { Hero } from "@/components/Hero";
-import { baseURL, routes } from "@/app/resources";
-import { home, about, person, newsletter } from "@/app/resources/content";
 import { Mailchimp } from "@/components";
-import { Posts } from "@/components/blog/Posts";
 import { Projects } from "@/components/work/Projects";
-import { Meta, Schema } from "@/once-ui/modules";
+import { Posts } from "@/components/blog/Posts";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -27,19 +25,20 @@ export async function generateMetadata() {
     description: home.description,
     baseURL: baseURL,
     path: home.path,
+    image: home.image,
   });
 }
 
 export default function Home() {
   return (
-    <Column maxWidth="m" gap="m" horizontal="center">
+    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
         path={home.path}
         title={home.title}
         description={home.description}
-        image={`${baseURL}/og?title=${encodeURIComponent(home.title)}`}
+        image={`/api/og/generate?title=${encodeURIComponent(home.title)}`}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -50,19 +49,27 @@ export default function Home() {
         <Hero />
       </Column>
       {routes["/blog"] && (
-        <Flex fillWidth gap="24" mobileDirection="column">
-          <Flex flex={1} paddingLeft="l" paddingTop="24">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              Editoriais
-            </Heading>
-          </Flex>
-          <Flex flex={3} paddingX="20">
-            <Posts range={[1, 1]} columns="2" />
-          </Flex>
-        </Flex>
+        <Column fillWidth gap="24" marginBottom="l">
+          <Row fillWidth paddingRight="64">
+            <Line maxWidth={48} />
+          </Row>
+          <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
+            <Row flex={1} paddingLeft="l" paddingTop="24">
+              <Heading as="h2" variant="display-strong-xs" wrap="balance">
+                Editoriais
+              </Heading>
+            </Row>
+            <Row flex={3} paddingX="20">
+              <Posts range={[1, 1]} columns="2" />
+            </Row>
+          </Row>
+          <Row fillWidth paddingLeft="64" horizontal="end">
+            <Line maxWidth={48} />
+          </Row>
+        </Column>
       )}
       <Projects range={[1]} />
-      {newsletter.display && <Mailchimp newsletter={newsletter} />}
+      <Mailchimp marginBottom="l" />
     </Column>
   );
 }
