@@ -47,6 +47,11 @@ const social = [
     icon: "email",
     link: `mailto:${"kushroomog@gmail.com"}`,
   },
+  {
+    name: "RSS Feed",
+    icon: "rss",
+    link: "/blog/rss.xml",
+  },
 ];
 
 const home = {

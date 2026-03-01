@@ -43,6 +43,7 @@ import {
   FaX,
   FaInstagram,
   FaYoutube,
+  FaRss,
 } from "react-icons/fa6";
 
 export const iconLibrary: Record<string, IconType> = {
@@ -82,6 +83,7 @@ export const iconLibrary: Record<string, IconType> = {
   document: HiOutlineDocument,
   instagram: FaInstagram,
   youtube: FaYoutube,
+  rss: FaRss,
 };
 
 export type IconLibrary = typeof iconLibrary;
