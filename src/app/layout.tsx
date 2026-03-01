@@ -13,7 +13,7 @@ import {
   RevealFx,
   SpacingToken,
 } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from "@/components";
+import { Footer, Header, RouteGuard, Providers, Waves } from "@/components";
 import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
 
 export async function generateMetadata() {
@@ -52,7 +52,6 @@ export default async function RootLayout({
               (function() {
                 try {
                   const root = document.documentElement;
-                  const defaultTheme = 'system';
                   
                   // Set defaults from config
                   const config = ${JSON.stringify({
@@ -65,7 +64,6 @@ export default async function RootLayout({
                     surface: style.surface,
                     transition: style.transition,
                     scaling: style.scaling,
-                    "viz-style": dataStyle.variant,
                   })};
                   
                   // Apply default values
@@ -108,12 +106,42 @@ export default async function RootLayout({
           as="body"
           background="page"
           fillWidth
+          suppressHydrationWarning
           style={{ minHeight: "100vh" }}
           margin="0"
           padding="0"
           horizontal="center"
+          className={classNames(
+            fonts.heading.variable,
+            fonts.body.variable,
+            fonts.label.variable,
+            fonts.code.variable,
+          )}
         >
-          <RevealFx fill position="absolute">
+          <Waves
+            lineColor="rgba(144, 238, 144, 0.15)"
+            lineWidth={1}
+            backgroundColor="transparent"
+            waveSpeedX={0.02}
+            waveSpeedY={0.01}
+            waveAmpX={0}
+            waveAmpY={60}
+            friction={0.9}
+            tension={0.01}
+            maxCursorMove={120}
+            xGap={20}
+            yGap={80}
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              zIndex: -1,
+              opacity: 1,
+            }}
+          />
+          <RevealFx fill position="absolute" style={{ zIndex: -1 }}>
             <Background
               mask={{
                 x: effects.mask.x,

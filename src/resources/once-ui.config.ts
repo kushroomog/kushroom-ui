@@ -1,22 +1,34 @@
 import { Geist } from "next/font/google";
 import { Geist_Mono } from "next/font/google";
 
-const primaryFont = Geist({
-  variable: "--font-primary",
+const headingFont = Geist({
+  variable: "--font-family-heading",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const bodyFont = Geist({
+  variable: "--font-family-body",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const labelFont = Geist({
+  variable: "--font-family-label",
   subsets: ["latin"],
   display: "swap",
 });
 
 const monoFont = Geist_Mono({
-  variable: "--font-code",
+  variable: "--font-family-code",
   subsets: ["latin"],
   display: "swap",
 });
 
 const fonts = {
-  primary: primaryFont,
-  secondary: primaryFont,
-  tertiary: primaryFont,
+  heading: headingFont,
+  body: bodyFont,
+  label: labelFont,
   code: monoFont,
 };
 
@@ -147,10 +159,11 @@ const schema = {
   email: "kushroomog@gmail.com",
 };
 
-const sameAs = [
-  "https://www.instagram.com/kushroomog",
-  "https://www.youtube.com/@SMITH-I",
-];
+const sameAs = {
+  threads: "",
+  linkedin: "",
+  discord: "",
+};
 
 const socialSharing = {
   display: true,
@@ -168,16 +181,17 @@ const socialSharing = {
 };
 
 const dataStyle = {
-  "data-theme": style.theme,
-  "data-neutral": style.neutral,
-  "data-brand": style.brand,
-  "data-accent": style.accent,
-  "data-solid": style.solid,
-  "data-solid-style": style.solidStyle,
-  "data-border": style.border,
-  "data-surface": style.surface,
-  "data-transition": style.transition,
-  "data-scaling": style.scaling,
+  variant: "line" as const,
+  mode: "solid" as const,
+  height: 240,
+  axis: {
+    stroke: "var(--neutral-alpha-weak)",
+  },
+  tick: {
+    fill: "var(--neutral-alpha-weak)",
+    fontSize: 12,
+    line: false,
+  },
 };
 
 export {

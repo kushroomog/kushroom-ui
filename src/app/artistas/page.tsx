@@ -6,23 +6,23 @@ import {
   Heading,
   Icon,
   IconButton,
-  SmartImage,
   Tag,
   Text,
-} from "@/once-ui/components";
-import { baseURL } from "@/app/resources";
+  Meta,
+  Schema,
+  Row,
+} from "@once-ui-system/core";
+import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
-import { person, about, social, work } from "@/app/resources/content";
 import React from "react";
-import { Meta, Schema } from "@/once-ui/modules";
 
 export async function generateMetadata() {
   return Meta.generate({
     title: about.title,
     description: about.description,
     baseURL: baseURL,
-    image: `${baseURL}/og?title=${encodeURIComponent(about.title)}`,
+    image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
     path: about.path,
   });
 }
@@ -39,16 +39,6 @@ export default function About() {
       display: about.work.display,
       items: about.work.experiences.map((experience) => experience.company),
     },
-    /* {
-     *   title: about.studies.title,
-     *   display: about.studies.display,
-     *   items: about.studies.institutions.map((institution) => institution.name),
-     * }, */
-    /* {
-     *   title: about.technical.title,
-     *   display: about.technical.display,
-     *   items: about.technical.skills.map((skill) => skill.title),
-     * }, */
   ];
   return (
     <Column maxWidth="m">
@@ -58,7 +48,7 @@ export default function About() {
         title={about.title}
         description={about.description}
         path={about.path}
-        image={`${baseURL}/og?title=${encodeURIComponent(about.title)}`}
+        image={`/api/og/generate?title=${encodeURIComponent(about.title)}`}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -72,16 +62,19 @@ export default function About() {
           position="fixed"
           paddingLeft="24"
           gap="32"
-          hide="s"
+          s={{ hide: true }}
         >
           <TableOfContents structure={structure} about={about} />
         </Column>
       )}
-      <Flex fillWidth mobileDirection="column" horizontal="center">
+      <Row fillWidth s={{ direction: "column" }} horizontal="center">
         {about.avatar.display && (
           <Column
             className={styles.avatar}
             position="sticky"
+            top="64"
+            fitHeight
+            s={{ position: "relative", style: { top: "auto" } }}
             minWidth="160"
             paddingX="l"
             paddingBottom="xl"
@@ -90,18 +83,18 @@ export default function About() {
             horizontal="center"
           >
             <Avatar src={person.avatar} size="xl" />
-            <Flex gap="8" vertical="center">
+            <Row gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
               {person.location}
-            </Flex>
-            {person.languages.length > 0 && (
-              <Flex wrap gap="8">
+            </Row>
+            {person.languages && person.languages.length > 0 && (
+              <Row wrap gap="8">
                 {person.languages.map((language, index) => (
-                  <Tag key={language} size="l">
+                  <Tag key={index} size="l">
                     {language}
                   </Tag>
                 ))}
-              </Flex>
+              </Row>
             )}
           </Column>
         )}
@@ -114,7 +107,7 @@ export default function About() {
             marginBottom="32"
           >
             {about.calendar.display && (
-              <Flex
+              <Row
                 fitWidth
                 border="brand-alpha-medium"
                 className={styles.blockAlign}
@@ -133,14 +126,14 @@ export default function About() {
                   name="calendar"
                   onBackground="brand-weak"
                 />
-                <Flex paddingX="8">Agende conosco</Flex>
+                <Row paddingX="8">Agende conosco</Row>
                 <IconButton
                   href={about.calendar.link}
                   data-border="rounded"
                   variant="secondary"
                   icon="chevronRight"
                 />
-              </Flex>
+              </Row>
             )}
             <Heading className={styles.textAlign} variant="display-strong-xl">
               {person.name}
@@ -153,7 +146,7 @@ export default function About() {
               {person.role}
             </Text>
             {social.length > 0 && (
-              <Flex
+              <Row
                 className={styles.blockAlign}
                 paddingTop="20"
                 paddingBottom="8"
@@ -167,27 +160,29 @@ export default function About() {
                   (item) =>
                     item.link && (
                       <React.Fragment key={item.name}>
-                        <Button
-                          className="s-flex-hide"
-                          key={item.name}
-                          href={item.link}
-                          prefixIcon={item.icon}
-                          label={item.name}
-                          size="s"
-                          variant="secondary"
-                        />
-                        <IconButton
-                          className="s-flex-show"
-                          size="l"
-                          key={`${item.name}-icon`}
-                          href={item.link}
-                          icon={item.icon}
-                          variant="secondary"
-                        />
+                        <Row s={{ hide: true }}>
+                          <Button
+                            key={item.name}
+                            href={item.link}
+                            prefixIcon={item.icon}
+                            label={item.name}
+                            size="s"
+                            variant="secondary"
+                          />
+                        </Row>
+                        <Row hide s={{ hide: false }}>
+                          <IconButton
+                            size="l"
+                            key={`${item.name}-icon`}
+                            href={item.link}
+                            icon={item.icon}
+                            variant="secondary"
+                          />
+                        </Row>
                       </React.Fragment>
                     ),
                 )}
-              </Flex>
+              </Row>
             )}
           </Column>
 
@@ -202,7 +197,7 @@ export default function About() {
             </Column>
           )}
 
-          <Column maxWidth="m" paddingY="l" gap="l">
+          <Column fillWidth paddingY="l" gap="l">
             {/* Page title */}
             <Heading as="h1" variant="display-strong-s" marginBottom="m">
               Artistas
@@ -213,13 +208,13 @@ export default function About() {
               {about.work.experiences.map((exp, idx) => (
                 <Column key={idx} fillWidth gap="4">
                   {/* Company name + Instagram beside it + timeframe */}
-                  <Flex
+                  <Row
                     fillWidth
-                    horizontal="space-between"
+                    horizontal="between"
                     vertical="center"
                     marginBottom="4"
                   >
-                    <Flex vertical="center" gap="8">
+                    <Row vertical="center" gap="8">
                       <Text variant="heading-strong-l">{exp.company}</Text>
                       {exp.instagram && (
                         <a
@@ -237,14 +232,14 @@ export default function About() {
                           <Text variant="body-default-s">@{exp.instagram}</Text>
                         </a>
                       )}
-                    </Flex>
+                    </Row>
                     <Text
                       variant="heading-default-xs"
                       onBackground="neutral-weak"
                     >
                       {exp.timeframe}
                     </Text>
-                  </Flex>
+                  </Row>
 
                   {/* Role */}
                   <Text
@@ -256,13 +251,10 @@ export default function About() {
                   </Text>
 
                   {/* Achievements list with profile pic beside */}
-                  <Flex fillWidth gap="l" vertical="start">
-                    <SmartImage
+                  <Row fillWidth gap="l" vertical="start" s={{ direction: "column", horizontal: "center" }}>
+                    <Avatar
                       src={exp.image ?? person.avatar}
-                      alt={exp.company}
-                      radius="full"
-                      enlarge
-                      sizes="200px"
+                      size="xl"
                       style={{
                         width: 200,
                         height: 200,
@@ -276,13 +268,13 @@ export default function About() {
                         </Text>
                       ))}
                     </Column>
-                  </Flex>
+                  </Row>
                 </Column>
               ))}
             </Column>
           </Column>
         </Column>
-      </Flex>
+      </Row>
     </Column>
   );
 }

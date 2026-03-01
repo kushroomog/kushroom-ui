@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import { getPosts } from "@/app/utils/utils";
-import { baseURL } from "@/app/resources";
-import { blog } from "@/app/resources/content";
+import { getPosts } from "@/utils/utils";
+import { baseURL, blog } from "@/resources";
 
 export async function GET() {
   const allPosts = getPosts(["src", "app", "blog", "posts"]);

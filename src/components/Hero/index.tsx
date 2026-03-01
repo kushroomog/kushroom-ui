@@ -10,8 +10,8 @@ import {
   Button,
   Flex,
   Avatar,
-} from "@/once-ui/components";
-import { home, about, person, gallery } from "@/app/resources/content";
+} from "@once-ui-system/core";
+import { home, about, person } from "@/resources";
 
 export function Hero() {
   // raw `/images/...` path works in dev and prod
@@ -113,7 +113,7 @@ export function Hero() {
           >
             <Flex gap="8" vertical="center">
               {about.avatar.display && (
-                <Avatar src={person.avatar} size="m" radius="full" />
+                <Avatar src={person.avatar} size="m" />
               )}
               {about.title}
             </Flex>

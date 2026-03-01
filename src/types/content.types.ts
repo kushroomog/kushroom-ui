@@ -45,7 +45,7 @@ export type Newsletter = {
 /**
  * Social link configuration.
  */
-export type Social = Array<{
+export type SocialItem = {
   /** Name of the social platform */
   name: string;
   /** Icon for the social platform
@@ -61,7 +61,9 @@ export type Social = Array<{
   link: string;
   /** Whether this social link is essential and should be displayed on the about page */
   essential?: boolean;
-}>;
+};
+
+export type Social = Array<SocialItem>;
 
 /**
  * Base interface for page configuration with common properties.
@@ -104,6 +106,35 @@ export interface Home extends BasePageConfig {
 }
 
 /**
+ * Experience type for work sections
+ */
+export type Experience = {
+  /** Company name */
+  company: string;
+  /** Timeframe of employment */
+  timeframe: string;
+  /** Role or job title */
+  role: string;
+  /** Achievements at the company */
+  achievements: React.ReactNode[];
+  /** Instagram handle */
+  instagram?: string;
+  /** Main image for the experience */
+  image?: string;
+  /** Images related to the experience */
+  images?: Array<{
+    /** Image source path */
+    src: string;
+    /** Image alt text */
+    alt: string;
+    /** Image width ratio */
+    width: number;
+    /** Image height ratio */
+    height: number;
+  }>;
+};
+
+/**
  * About page configuration.
  * @description Configuration for the About page, including sections for table of contents, avatar, calendar, introduction, work experience, studies, and technical skills.
  */
@@ -143,27 +174,7 @@ export interface About extends BasePageConfig {
     /** Title for the work experience section */
     title: string;
     /** List of work experiences */
-    experiences: Array<{
-      /** Company name */
-      company: string;
-      /** Timeframe of employment */
-      timeframe: string;
-      /** Role or job title */
-      role: string;
-      /** Achievements at the company */
-      achievements: React.ReactNode[];
-      /** Images related to the experience */
-      images?: Array<{
-        /** Image source path */
-        src: string;
-        /** Image alt text */
-        alt: string;
-        /** Image width ratio */
-        width: number;
-        /** Image height ratio */
-        height: number;
-      }>;
-    }>;
+    experiences: Array<Experience>;
   };
   /** Studies/education section */
   studies: {

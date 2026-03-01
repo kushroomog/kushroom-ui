@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/once-ui/components";
+import { Button } from "@once-ui-system/core";
 
 interface InstagramShareButtonProps {
   imageUrl: string;
@@ -70,7 +70,6 @@ export function InstagramShareButton({
         data-border="rounded"
         variant="secondary"
         size="m"
-        arrowIcon
         onClick={shareImageAsset}
         disabled={loading}
       >

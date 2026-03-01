@@ -1,11 +1,11 @@
 import React from "react";
 import Link from "next/link";
-import { Flex, Heading, Avatar } from "@/once-ui/components";
-import { about } from "@/app/resources/content";
+import { Flex, Heading, Avatar } from "@once-ui-system/core";
+import { about } from "@/resources";
 
 export function TeamSection() {
   return (
-    <Flex fillWidth gap="24" mobileDirection="column">
+    <Flex fillWidth gap="24" s={{ direction: "column" }}>
       <Flex flex={1} paddingLeft="l" paddingTop="24" horizontal="end">
         <Heading as="h2" variant="display-strong-xs" wrap="balance">
           Equipe
@@ -17,7 +17,6 @@ export function TeamSection() {
           <Link key={member.company} href="/artistas" passHref>
             <Avatar
               src={member.image}
-              radius="full"
               style={{ cursor: "pointer" }}
             />
           </Link>
