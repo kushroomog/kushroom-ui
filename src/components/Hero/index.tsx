@@ -56,7 +56,7 @@ export function Hero() {
               background="brand-alpha-weak"
               paddingX="12"
               paddingY="4"
-              onBackground="neutral-strong"
+              style={{ color: 'white' }}
               textVariant="label-default-s"
               arrow={false}
               href={home.featured.href}
@@ -110,6 +110,7 @@ export function Hero() {
             variant="secondary"
             size="m"
             arrowIcon
+            style={{ color: 'white' }}
           >
             <Flex gap="8" vertical="center">
               {about.avatar.display && (
