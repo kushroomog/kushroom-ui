@@ -28,12 +28,12 @@ export function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* dark overlay */}
+      {/* dark overlay and bottom fade */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          background: "linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 70%, var(--page-background) 100%)",
         }}
       />
 

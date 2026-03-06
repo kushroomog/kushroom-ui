@@ -1,5 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { Grid } from "@once-ui-system/core";
+import { Grid, RevealFx } from "@once-ui-system/core";
 import Post from "./Post";
 
 interface PostsProps {
@@ -8,6 +8,8 @@ interface PostsProps {
   thumbnail?: boolean;
   direction?: "row" | "column";
   exclude?: string[];
+  variant?: "default" | "home";
+  stagger?: boolean;
 }
 
 export function Posts({
@@ -16,10 +18,11 @@ export function Posts({
   thumbnail = false,
   exclude = [],
   direction,
+  variant = "default",
+  stagger = false,
 }: PostsProps) {
   let allBlogs = getPosts(["src", "app", "blog", "posts"]);
 
-  // Exclude by slug (exact match)
   if (exclude.length) {
     allBlogs = allBlogs.filter((post) => !exclude.includes(post.slug));
   }
@@ -29,15 +32,32 @@ export function Posts({
   });
 
   const displayedBlogs = range
-    ? sortedBlogs.slice(range[0] - 1, range.length === 2 ? range[1] : sortedBlogs.length)
+    ? sortedBlogs.slice(range[0] - 1, range[1] ? range[1] : sortedBlogs.length)
     : sortedBlogs;
 
   return (
     <>
       {displayedBlogs.length > 0 && (
         <Grid columns={columns} s={{ columns: 1 }} fillWidth marginBottom="40" gap="16">
-          {displayedBlogs.map((post) => (
-            <Post key={post.slug} post={post} thumbnail={thumbnail} direction={direction} />
+          {displayedBlogs.map((post, index) => (
+            stagger ? (
+              <RevealFx key={post.slug} translateY="12" delay={index * 0.1} speed="medium">
+                <Post 
+                  post={post} 
+                  thumbnail={thumbnail} 
+                  direction={direction} 
+                  variant={variant}
+                />
+              </RevealFx>
+            ) : (
+              <Post 
+                key={post.slug} 
+                post={post} 
+                thumbnail={thumbnail} 
+                direction={direction} 
+                variant={variant}
+              />
+            )
           ))}
         </Grid>
       )}

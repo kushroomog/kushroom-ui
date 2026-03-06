@@ -62,15 +62,16 @@ export default async function Project({
     ? routeParams.slug.join("/")
     : routeParams.slug || "";
 
-  let post = getPosts(["src", "app", "projetos", "projects"]).find((post) => post.slug === slugPath);
+  const allProjects = getPosts(["src", "app", "projetos", "projects"]);
+  const post = allProjects.find((p) => p.slug === slugPath);
 
   if (!post) {
     notFound();
   }
 
   const avatars =
-    post.metadata.team?.map((person) => ({
-      src: person.avatar,
+    post.metadata.team?.map((p) => ({
+      src: p.avatar,
     })) || [];
 
   return (
@@ -129,7 +130,7 @@ export default async function Project({
         <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
           Projetos relacionados
         </Heading>
-        <Projects exclude={[post.slug]} range={[1]} />
+        <Projects posts={allProjects} exclude={[post.slug]} range={[1]} display="grid" />
       </Column>
       <ScrollToHash />
     </Column>

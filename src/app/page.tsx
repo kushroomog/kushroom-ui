@@ -18,6 +18,7 @@ import { Hero } from "@/components/Hero";
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { getPosts } from "@/utils/utils";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -30,8 +31,10 @@ export async function generateMetadata() {
 }
 
 export default function Home() {
+  const allProjects = getPosts(["src", "app", "projetos", "projects"]);
+
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column maxWidth="m" gap="64" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -45,39 +48,44 @@ export default function Home() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Column fillWidth gap="m">
-        <Hero />
-      </Column>
-      <Column fillWidth gap="24" marginBottom="40" paddingX="l">
-        <Row fillWidth gap="12" vertical="center">
-          <Heading as="h2" variant="heading-strong-xl">
+      
+      <RevealFx translateY="16" speed="slow" fillWidth>
+        <Column fillWidth gap="m">
+          <Hero />
+        </Column>
+      </RevealFx>
+      
+      <Column fillWidth gap="32" paddingX="l">
+        <RevealFx translateY="16" speed="medium">
+          <Heading as="h2" variant="display-strong-s">
             Últimos Lançamentos
           </Heading>
-        </Row>
-        <Projects range={[1, 6]} display="grid" />
+        </RevealFx>
+        <RevealFx delay={0.2} translateY="12" speed="medium" fillWidth>
+          <Projects posts={allProjects} range={[1, 6]} display="row" />
+        </RevealFx>
       </Column>
 
       {routes["/blog"] && (
-        <Column fillWidth gap="24" marginBottom="l">
-          <Row fillWidth paddingRight="64">
-            <Line maxWidth={48} />
-          </Row>
-          <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
+        <Column fillWidth gap="32" marginBottom="l">
+          <Row fillWidth gap="24" s={{ direction: "column" }}>
             <Row flex={1} paddingLeft="l" paddingTop="24">
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                Editoriais
-              </Heading>
+              <RevealFx translateY="16" speed="medium">
+                <Heading as="h2" variant="display-strong-s" wrap="balance">
+                  Editoriais
+                </Heading>
+              </RevealFx>
             </Row>
             <Row flex={3} paddingX="20">
-              <Posts range={[1, 4]} columns="2" thumbnail direction="column" />
+              <Posts range={[1, 4]} columns="2" direction="column" variant="home" stagger />
             </Row>
-          </Row>
-          <Row fillWidth paddingLeft="64" horizontal="end">
-            <Line maxWidth={48} />
           </Row>
         </Column>
       )}
-      <Mailchimp marginBottom="l" />
+
+      <RevealFx delay={0.2} translateY="8" fillWidth>
+        <Mailchimp marginBottom="l" />
+      </RevealFx>
     </Column>
   );
 }
