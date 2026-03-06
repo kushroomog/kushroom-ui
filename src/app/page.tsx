@@ -48,6 +48,15 @@ export default function Home() {
       <Column fillWidth gap="m">
         <Hero />
       </Column>
+      <Column fillWidth gap="24" marginBottom="40" paddingX="l">
+        <Row fillWidth gap="12" vertical="center">
+          <Heading as="h2" variant="heading-strong-xl">
+            Últimos Lançamentos
+          </Heading>
+        </Row>
+        <Projects range={[1, 6]} display="grid" />
+      </Column>
+
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
           <Row fillWidth paddingRight="64">
@@ -60,7 +69,7 @@ export default function Home() {
               </Heading>
             </Row>
             <Row flex={3} paddingX="20">
-              <Posts range={[1, 1]} columns="2" />
+              <Posts range={[1, 4]} columns="2" thumbnail direction="column" />
             </Row>
           </Row>
           <Row fillWidth paddingLeft="64" horizontal="end">
@@ -68,7 +77,6 @@ export default function Home() {
           </Row>
         </Column>
       )}
-      <Projects range={[1]} />
       <Mailchimp marginBottom="l" />
     </Column>
   );

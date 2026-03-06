@@ -1,4 +1,5 @@
 import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import { artistsExperiences } from "@/app/artistas/artists";
 
 const person: Person = {
   firstName: "Kushroom",
@@ -110,109 +111,7 @@ const about: About = {
   work: {
     display: false,
     title: "Artistas",
-    experiences: [
-      {
-        company: "SMITH-I",
-        timeframe: "2024 – Presente",
-        role: "MC / Rapper",
-        achievements: [
-          <>
-            2018: integrou o Coletivo Cabelo Crespo ao lado de Gum Beats,
-            iniciando agenda intensa de shows e parcerias locais.
-          </>,
-          <>
-            2019–2021: cofundador do selo INSP MUSIC, elevando qualidade
-            artística e visibilidade de novos talentos.
-          </>,
-          <>
-            2021: fundou a gravadora Favela No Auge, consolidando-se como voz
-            forte do underground.
-          </>,
-          <>
-            2024: uniu-se à Kushroom e ao produtor Marqueta, mesclando Trap,
-            RAP, Amapiano e outras vertentes.
-          </>,
-        ],
-        instagram: "oficialsmithi",
-        image: "/images/kush/smith.png",
-      },
-      {
-        company: "Marqueta",
-        timeframe: "2024 — Presente",
-        role: "Beatmaker / Produtor Musical",
-        achievements: [
-          <>
-            Produções envolventes transitando pelo trap, incorporando elementos
-            de Afrobeat, funk, dub e música eletrônica.
-          </>,
-          <>
-            Melodias ricas construídas with instrumentos e sintetizadores,
-            criando atmosferas imersivas.
-          </>,
-          <>
-            Cada faixa transporta o ouvinte a novas paisagens sonoras,
-            evidenciando versatilidade e identidade artística.
-          </>,
-        ],
-        instagram: "marquetaksh",
-        image: "/images/kush/marqueta.jpg",
-      },
-      {
-        company: "Chico Dias",
-        timeframe: "2024 – Presente",
-        role: "Instrumentista / Produtor",
-        achievements: [
-          <>Atua como guitarrista na cena independente de SP desde 2009.</>,
-          <>2015: membro da banda À Margem (metal/rap).</>,
-          <>2019: arranjista no INSP Music / Coletivo Cabelo Crespo.</>,
-          <>2020: participou do Beco do Magrão em Poá/SP.</>,
-          <>Influências: MPB, Jazz, música latina.</>,
-        ],
-        instagram: "chicodisk",
-        image: "/images/kush/chico.jpg",
-      },
-      {
-        company: "Mossato",
-        timeframe: "2024 – Presente",
-        role: "Produtor • 3D • Audiovisual • Fotografia • Videomaker",
-        achievements: [
-          <>
-            Engenheiro de mix e master na Kushroom, moldando identidade e punch.
-          </>,
-          <>
-            Atua em audiovisual: direção, captação e edição de clipes e
-            sessions.
-          </>,
-          <>
-            Cria conteúdos em 3D e fotografia, integrando imagem e som na
-            estética da label.
-          </>,
-        ],
-        instagram: "mossato1400",
-        image: "/images/kush/mossato.jpg",
-      },
-      {
-        company: "Lucas Carvalho",
-        timeframe: "2024 – Presente",
-        role: "Tatuador • Artista Visual • Co-criador da Kushroom Clothing",
-        achievements: [
-          <>
-            Artista visual responsável por transportar o universo da Kushroom
-            para murais, capas e coleções.
-          </>,
-          <>
-            Fundou o Tattoo Carva em 2021, criando um estúdio criativo para
-            conectar pessoas às artes que sonham.
-          </>,
-          <>
-            Um dos criadores da Kushroom Clothing, conectando tatuagem, moda e
-            lifestyle independente.
-          </>,
-        ],
-        instagram: "lu_carva",
-        image: "/images/kush/luqueta.jpg",
-      },
-    ],
+    experiences: artistsExperiences,
   },
   studies: {
     display: false,
@@ -257,7 +156,7 @@ const verticalImages = Array.from({ length: 6 }, (_, i) => ({
   src: `/images/gallery/vertical-${i + 1}.jpg`,
   alt: `Editorial Kushroom ${i + 1}`,
   orientation: "vertical" as const,
-}));
+})).filter(img => !img.src.includes('vertical-5.jpg'));
 
 const gallery: Gallery = {
   path: "/galeria",
