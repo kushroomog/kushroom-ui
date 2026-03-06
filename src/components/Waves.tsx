@@ -355,7 +355,12 @@ const Waves: React.FC<WavesProps> = ({
         { opacity: 0.15, x: -4, y: 8 }
       ];
 
-      ctx.strokeStyle = configRef.current.lineColor;
+      let resolvedColor = configRef.current.lineColor;
+      if (resolvedColor.startsWith('var(')) {
+        resolvedColor = getComputedStyle(document.documentElement).getPropertyValue(resolvedColor.slice(4, -1)).trim();
+      }
+
+      ctx.strokeStyle = resolvedColor;
       ctx.lineWidth = configRef.current.lineWidth;
 
       reverbLayers.forEach((layer) => {

@@ -119,7 +119,7 @@ export default async function RootLayout({
           )}
         >
           <Waves
-            lineColor="rgba(144, 238, 144, 0.15)"
+            lineColor="var(--wave-line-color)"
             lineWidth={1}
             backgroundColor="transparent"
             waveSpeedX={0.02}
